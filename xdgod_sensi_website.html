@@ -37,7 +37,7 @@
     padding: 22px 0 40px;
   }
 
-  /* Header */
+  /* Header & Brand Logo */
   header {
     display: flex;
     align-items: center;
@@ -46,12 +46,44 @@
     margin-bottom: 24px;
   }
 
+  .brand-wrap {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+
+  .brand-logo {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 2px solid #a855f7;
+    box-shadow: 0 0 16px #a855f788;
+    background: #1a0f26;
+  }
+
+  .brand-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
   .brand {
     font-weight: 900;
-    font-size: clamp(20px, 5vw, 28px);
+    font-size: clamp(19px, 4.8vw, 26px);
     letter-spacing: 0.4px;
     color: #e7caff;
     text-shadow: 0 0 18px #a855f788;
+  }
+
+  .brand-sub {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+    color: #b9a9c9;
+    text-transform: uppercase;
   }
 
   .pill {
@@ -364,13 +396,29 @@
     .modes {
       grid-template-columns: repeat(2, 1fr);
     }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+    }
   }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <div class="brand">XDGOD SENSI 👾</div>
+    <div class="brand-wrap">
+      <!-- Upload your logo image to GitHub in the same folder as index.html and rename it to logo.jpg -->
+      <img
+        class="brand-logo"
+        src="logo.jpg"
+        alt="XcussedGod Logo"
+        onerror="this.style.display='none'"
+      >
+      <div class="brand-text">
+        <div class="brand">XDGOD SENSI 👾</div>
+        <span class="brand-sub">XcussedGod Official</span>
+      </div>
+    </div>
     <div class="pill">● SMART GENERATOR</div>
   </header>
 
@@ -430,7 +478,6 @@
 
   <section class="card">
     <h2>02 / SENSITIVITY PREFERENCE</h2>
-    <!-- Added CUSTOM button so users can toggle the custom slider panel -->
     <div class="modes" role="group" aria-label="Sensitivity level">
       <button class="mode" data-mode="low" type="button">LOW</button>
       <button class="mode active" data-mode="medium" type="button">MEDIUM</button>
@@ -478,9 +525,6 @@
   let mode = "medium";
   let lastSettings = null;
 
-  /**
-   * Toggle sensitivity mode buttons and show/hide the custom slider panel
-   */
   document.querySelectorAll(".mode").forEach((btn) => {
     btn.addEventListener("click", () => {
       mode = btn.dataset.mode;
@@ -491,24 +535,14 @@
     });
   });
 
-  /**
-   * Update live numeric readout for Custom General sensitivity slider
-   */
   $("customGeneral").addEventListener("input", () => {
     $("rangeValue").textContent = $("customGeneral").value;
   });
 
-  /**
-   * Clamp integer sensitivity value within valid Free Fire bounds
-   */
   function clamp(n, min, max) {
     return Math.max(min, Math.min(max, Math.round(n)));
   }
 
-  /**
-   * Calculate 6 scope sensitivity values based on mode, playstyle, RAM, and optional micro-variation
-   * @param {boolean} isRegenerate - Applies a subtle +/- 3 variance when user clicks "Generate Again"
-   */
   function makeSettings(isRegenerate = false) {
     const ram = Number($("ram").value) || 4;
     const style = $("style").value || "balanced";
@@ -521,7 +555,6 @@
 
     let b;
     if (mode === "custom") {
-      // Scale secondary scopes proportionally when custom General is selected
       const customG = Number($("customGeneral").value) || 150;
       const ratio = customG / 145;
       b = {
@@ -557,9 +590,6 @@
     };
   }
 
-  /**
-   * Display floating status toast message
-   */
   function showToast(msg) {
     const t = $("toast");
     t.textContent = msg;
@@ -568,9 +598,6 @@
     showToast.timer = setTimeout(() => t.classList.remove("show"), 2200);
   }
 
-  /**
-   * Validate inputs, compute settings, and render result cards
-   */
   function generate(isRegenerate = false) {
     try {
       const brandVal = $("brand").value;
@@ -594,7 +621,6 @@
 
       $("deviceSummary").textContent = `${brandVal} ${modelVal} • ${$("ram").value} GB RAM • ${styleLabel} • ${modeLabel}`;
 
-      // Safely build DOM nodes to prevent any HTML injection from model name
       const statsContainer = $("stats");
       statsContainer.innerHTML = "";
       Object.entries(lastSettings).forEach(([name, value]) => {
@@ -627,9 +653,6 @@
   $("generate").addEventListener("click", () => generate(false));
   $("regenerate").addEventListener("click", () => generate(true));
 
-  /**
-   * Copy all generated sensitivity settings to clipboard
-   */
   $("copy").addEventListener("click", async () => {
     if (!lastSettings) return;
     const text =

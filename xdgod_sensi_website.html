@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#10091d">
+<title>XDGOD SENSI 👾 | Free Fire Sensitivity Generator</title>
+<style>
+:root{--bg:#0b0711;--panel:#160e21;--panel2:#211431;--purple:#a855f7;--purple2:#7c3aed;--text:#f8f3ff;--muted:#b9a9c9;--line:#38244b;--green:#65e6a5}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(ellipse at 50% -15%,#392052 0%,#140c1d 38%,var(--bg) 75%);color:var(--text);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100vh}
+.wrap{width:min(100% - 28px,760px);margin:auto;padding:22px 0 40px}
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:24px}
+.brand{font-weight:900;font-size:clamp(20px,5vw,28px);letter-spacing:.4px;color:#e7caff;text-shadow:0 0 18px #a855f788}
+.pill{font-size:11px;font-weight:800;letter-spacing:1px;color:var(--green);border:1px solid #2c7554;background:#10251d;padding:7px 10px;border-radius:99px}
+.hero{text-align:center;margin:24px 0 22px}
+.eyebrow{color:#c99bff;font-size:11px;font-weight:800;letter-spacing:3px}
+h1{font-size:clamp(29px,8vw,46px);line-height:1.05;margin:10px 0;background:linear-gradient(90deg,#fff,#d8b5ff,#a855f7);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);font-size:14px;margin:10px auto;max-width:470px;line-height:1.6}
+.card{background:linear-gradient(160deg,#1d122a,#120c1a);border:1px solid var(--line);border-radius:20px;padding:18px;margin:14px 0;box-shadow:0 14px 45px #0005}
+.card h2{font-size:15px;margin:0 0 15px;color:#e8d6ff}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field label{display:block;color:var(--muted);font-size:12px;margin:0 0 7px}
+select,input{width:100%;min-height:46px;background:#0e0915;color:var(--text);border:1px solid #49305f;border-radius:11px;padding:10px 12px;font:inherit;font-size:14px;outline:none}
+select:focus,input:focus{border-color:var(--purple);box-shadow:0 0 0 3px #a855f722}
+.modes{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}
+.mode{border:1px solid #49305f;background:#110b19;color:#d8c8e7;border-radius:11px;padding:12px 5px;font-weight:800;font-size:12px;cursor:pointer}
+.mode.active{background:linear-gradient(135deg,#8b35d5,#5424a0);border-color:#c28aff;color:white;box-shadow:0 0 18px #8b35d544}
+.custom{display:none;margin-top:14px}
+.custom.show{display:block}
+.range-row{display:grid;grid-template-columns:1fr 62px;align-items:center;gap:10px;margin:12px 0}
+.range-row label{font-size:12px;color:var(--muted)}
+input[type=range]{padding:0;min-height:24px;accent-color:var(--purple);border:0;background:transparent;box-shadow:none}
+.range-value{background:#0e0915;border:1px solid #49305f;border-radius:9px;text-align:center;padding:7px;font-weight:800;color:#e4c9ff}
+.primary,.secondary{width:100%;border:0;border-radius:13px;padding:15px;font-size:14px;font-weight:900;letter-spacing:.5px;cursor:pointer}
+.primary{background:linear-gradient(100deg,#a855f7,#702bd0);color:white;box-shadow:0 8px 24px #8736d955;margin-top:17px}
+.secondary{background:#241632;border:1px solid #51346b;color:#e8d6ff;margin-top:10px}
+button:active{transform:scale(.99)}
+.results{display:none}
+.results.show{display:block}
+.result-head{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.result-head small{color:var(--green);font-weight:800}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stat{background:#100a18;border:1px solid #38244b;border-radius:13px;padding:13px}
+.stat span{display:block;color:var(--muted);font-size:12px}
+.stat strong{display:block;font-size:27px;color:#e2c1ff;margin-top:4px}
+.note{font-size:12px;line-height:1.6;color:var(--muted);margin:14px 2px 0}
+.toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,20px);opacity:0;pointer-events:none;background:#251634;border:1px solid #8150aa;color:white;border-radius:99px;padding:11px 17px;font-size:13px;transition:.25s;z-index:5}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+footer{text-align:center;color:#8f7d9f;font-size:11px;margin-top:25px;line-height:1.8}
+@media(max-width:420px){.wrap{width:min(100% - 20px,760px)}.card{padding:15px}.grid{gap:9px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header><div class="brand">XDGOD SENSI 👾</div><div class="pill">● SMART GENERATOR</div></header>
+<section class="hero">
+<div class="eyebrow">FREE FIRE • PERSONALIZED STARTING SETTINGS</div>
+<h1>FIND YOUR<br>SENSITIVITY</h1>
+<p>Choose your device and playstyle. Generate a starting setup, then fine-tune it in Training Mode.</p>
+</section>
+
+<section class="card">
+<h2>01 / DEVICE DETAILS</h2>
+<div class="grid">
+<div class="field"><label for="brand">Phone brand</label><select id="brand"><option value="">Select brand</option><option>Samsung</option><option>Xiaomi / Redmi</option><option>POCO</option><option>Realme</option><option>OPPO</option><option>Vivo</option><option>OnePlus</option><option>Motorola</option><option>Infinix</option><option>iPhone</option><option>Other</option></select></div>
+<div class="field"><label for="model">Phone model</label><input id="model" maxlength="45" placeholder="e.g. Redmi Note 10"></div>
+<div class="field"><label for="ram">RAM</label><select id="ram"><option value="2">2 GB</option><option value="3">3 GB</option><option value="4" selected>4 GB</option><option value="6">6 GB</option><option value="8">8 GB</option><option value="12">12 GB</option><option value="16">16 GB+</option></select></div>
+<div class="field"><label for="style">Play style</label><select id="style"><option value="balanced">Balanced</option><option value="rush">Rusher</option><option value="sniper">Sniper</option><option value="precise">Precision / Drag</option></select></div>
+</div>
+</section>
+
+<section class="card">
+<h2>02 / SENSITIVITY PREFERENCE</h2>
+<div class="modes" role="group" aria-label="Sensitivity level">
+<button class="mode" data-mode="low" type="button">LOW</button>
+<button class="mode active" data-mode="medium" type="button">MEDIUM</button>
+<button class="mode" data-mode="high" type="button">HIGH</button>
+</div>
+<div class="custom" id="customPanel">
+<p class="note">Custom mode: choose your preferred General sensitivity. Other scopes will be adjusted around it.</p>
+<div class="range-row"><label for="customGeneral">General sensitivity</label><input id="customGeneral" type="range" min="50" max="200" value="150"><div class="range-value" id="rangeValue">150</div></div>
+</div>
+<button class="primary" id="generate" type="button">✨ GENERATE MY SENSITIVITY</button>
+</section>
+
+<section class="card results" id="results" aria-live="polite">
+<div class="result-head"><h2>YOUR SENSITIVITY</h2><small>✓ GENERATED</small></div>
+<p class="note" id="deviceSummary"></p>
+<div class="stats" id="stats"></div>
+<button class="primary" id="copy" type="button">▣ COPY ALL SETTINGS</button>
+<button class="secondary" id="regenerate" type="button">↻ GENERATE AGAIN</button>
+<p class="note">These are experimental starting recommendations, not official game settings or guaranteed perfect values. Test in Training Mode and adjust gradually to your device, HUD and personal control.</p>
+</section>
+
+<footer>MADE FOR THE COMMUNITY • XDGOD SENSI 👾<br>Not affiliated with or endorsed by Garena or Free Fire.</footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script>
+const $ = id => document.getElementById(id);
+let mode = "medium";
+let lastSettings = null;
+document.querySelectorAll(".mode").forEach(btn => btn.addEventListener("click", () => {
+  mode = btn.dataset.mode;
+  document.querySelectorAll(".mode").forEach(b => b.classList.toggle("active", b === btn));
+  $("customPanel").classList.toggle("show", mode === "custom");
+}));
+$("customGeneral").addEventListener("input", () => $("rangeValue").textContent = $("customGeneral").value);
+
+function clamp(n,min,max){return Math.max(min,Math.min(max,Math.round(n)));}
+function makeSettings(){
+  const ram = Number($("ram").value);
+  const style = $("style").value;
+  const bases = {low: {g:112,r:88,s2:78,s4:66,sn:48,free:70},
+                 medium:{g:145,r:115,s2:102,s4:88,sn:62,free:90},
+                 high:{g:180,r:148,s2:132,s4:112,sn:78,free:115}};
+  let b = mode === "custom" ? {...bases.medium,g:Number($("customGeneral").value)} : {...bases[mode]};
+  const styleOffsets = {
+    balanced:{g:0,r:0,s2:0,s4:0,sn:0,free:0},
+    rush:{g:8,r:7,s2:5,s4:2,sn:-2,free:5},
+    sniper:{g:-8,r:-5,s2:-4,s4:-3,sn:8,free:-3},
+    precise:{g:-4,r:-3,s2:-2,s4:-2,sn:3,free:-2}
+  }[style];
+  // RAM is used only for a very small comfort adjustment, not as a claim of hardware measurement.
+  const ramOffset = ram <= 3 ? -3 : ram >= 8 ? 2 : 0;
+  const out = {
+    "General":clamp(b.g+styleOffsets.g+ramOffset,50,200),
+    "Red Dot":clamp(b.r+styleOffsets.r+ramOffset,40,200),
+    "2X Scope":clamp(b.s2+styleOffsets.s2+ramOffset,35,200),
+    "4X Scope":clamp(b.s4+styleOffsets.s4+ramOffset,25,200),
+    "Sniper Scope":clamp(b.sn+styleOffsets.sn,10,200),
+    "Free Look":clamp(b.free+styleOffsets.free,30,200)
+  };
+  return out;
+}
+function showToast(msg){
+  const t=$("toast"); t.textContent=msg; t.classList.add("show");
+  clearTimeout(showToast.timer); showToast.timer=setTimeout(()=>t.classList.remove("show"),2200);
+}
+function generate(){
+  if(!$("brand").value){showToast("Please select your phone brand.");$("brand").focus();return;}
+  if(!$("model").value.trim()){showToast("Please enter your phone model.");$("model").focus();return;}
+  lastSettings=makeSettings();
+  $("deviceSummary").textContent=$("brand").value+" "+$("model").value.trim()+" • "+$("ram").value+" GB RAM • "+$("style").selectedOptions[0].text+" • "+(mode==="custom"?"Custom":mode.charAt(0).toUpperCase()+mode.slice(1));
+  $("stats").innerHTML=Object.entries(lastSettings).map(([name,value])=>`<div class="stat"><span>${name}</span><strong>${value}</strong></div>`).join("");
+  $("results").classList.add("show");
+  $("results").scrollIntoView({behavior:"smooth",block:"start"});
+}
+$("generate").addEventListener("click",generate);
+$("regenerate").addEventListener("click",generate);
+$("copy").addEventListener("click",async()=>{
+  if(!lastSettings)return;
+  const text="XDGOD SENSI 👾\n"+Object.entries(lastSettings).map(([k,v])=>k+": "+v).join("\n");
+  try{await navigator.clipboard.writeText(text);showToast("Sensitivity copied!");}
+  catch(e){
+    const area=document.createElement("textarea");area.value=text;document.body.appendChild(area);area.select();
+    try{document.execCommand("copy");showToast("Sensitivity copied!");}catch(err){showToast("Copy not supported. Please select and copy manually.");}
+    area.remove();
+  }
+});
+</script>
+</body>
+</html>
